@@ -30,7 +30,7 @@ export interface IGatsbyPage {
   isCreatedByStatefulCreatePages: boolean
   context: {}
   updatedAt: number
-  pluginCreator__NODE: Identifier
+  pluginCreator___NODE: Identifier
   pluginCreatorId: Identifier
   componentPath: SystemPath
 }
@@ -73,6 +73,7 @@ export interface IGatsbyNode {
 }
 
 export interface IGatsbyPlugin {
+  id: Identifier
   name: string
   version: string
 }
@@ -221,10 +222,12 @@ export interface ICachedReduxState {
 export type ActionsUnion =
   | IAddThirdPartySchema
   | ICreateFieldExtension
+  | ICreatePageAction
   | ICreatePageDependencyAction
   | ICreateTypes
   | IDeleteCacheAction
   | IDeleteComponentDependenciesAction
+  | IDeletePageAction
   | IPageQueryRunAction
   | IPrintTypeDefinitions
   | IQueryExtractedAction
@@ -375,6 +378,12 @@ export interface ICreateResolverContext {
     | { [camelCasedPluginNameWithoutPrefix: string]: IGatsbyPluginContext }
 }
 
+export interface ICreatePageAction {
+  type: `CREATE_PAGE`
+  payload: IGatsbyPage
+  plugin?: IGatsbyPlugin
+}
+
 export interface ICreateRedirectAction {
   type: `CREATE_REDIRECT`
   payload: IRedirect
@@ -382,6 +391,11 @@ export interface ICreateRedirectAction {
 
 export interface IDeleteCacheAction {
   type: `DELETE_CACHE`
+}
+
+export interface IDeletePageAction {
+  type: `DELETE_PAGE`
+  payload: IGatsbyPage
 }
 
 export interface IReplaceStaticQueryAction {
