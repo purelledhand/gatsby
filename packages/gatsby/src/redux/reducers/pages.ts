@@ -14,10 +14,6 @@ export const pagesReducer = (
 
       // throws an error if the page is not created by a plugin
       if (!action.plugin?.id) {
-        console.log(``)
-        console.error(JSON.stringify(action, null, 4))
-        console.log(``)
-
         throw new Error(
           `Pages can only be created by plugins. There wasn't a plugin set when creating this page.`
         )
